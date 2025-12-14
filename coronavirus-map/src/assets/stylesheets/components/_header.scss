@@ -1,16 +1,31 @@
 header {
-
   width: 100%;
   color: $white;
   background: $purple-modified;
+  padding: 0;
+  margin: 0;
 
-  @keyframes bugfix { from {padding:0;} to {padding:0;}}
-  @-webkit-keyframes bugfix { from {padding:0;} to {padding:0;}}
-  
-  p{
+  @keyframes bugfix {
+    from {
+      padding: 0;
+    }
+    to {
+      padding: 0;
+    }
+  }
+  @-webkit-keyframes bugfix {
+    from {
+      padding: 0;
+    }
+    to {
+      padding: 0;
+    }
+  }
+
+  p {
     font-weight: bold;
   }
-  
+
   #overlay-button {
     position: absolute;
     right: 1em;
@@ -20,45 +35,48 @@ header {
     cursor: pointer;
     user-select: none;
     span {
+      height: 4px;
+      width: 35px;
+      border-radius: 2px;
+      background-color: white;
+      position: relative;
+      display: block;
+      transition: all 0.2s ease-in-out;
+      &:before {
+        top: -10px;
+        visibility: visible;
+      }
+      &:after {
+        top: 10px;
+      }
+      &:before,
+      &:after {
         height: 4px;
         width: 35px;
         border-radius: 2px;
         background-color: white;
-        position: relative;
-        display: block;
-        transition: all .2s ease-in-out;
-        &:before {
-          top: -10px;
-          visibility: visible;
-        }
-        &:after {
-          top: 10px;
-        }
-        &:before, &:after {
-            height: 4px;
-            width: 35px;
-            border-radius: 2px;
-            background-color: white;
-            position: absolute;
-            content: "";
-            transition: all .2s ease-in-out;
-        }
+        position: absolute;
+        content: "";
+        transition: all 0.2s ease-in-out;
       }
-      &:hover span, &:hover span:before, &:hover span:after {
-
-      }
+    }
+    &:hover span,
+    &:hover span:before,
+    &:hover span:after {
+    }
   }
-  
-  input[type=checkbox] {
+
+  input[type="checkbox"] {
     display: none;
   }
-  
-  input[type=checkbox]:checked ~ #overlay {
+
+  input[type="checkbox"]:checked ~ #overlay {
     visibility: visible;
   }
-  
-  input[type=checkbox]:checked ~ #overlay-button {
-    &:hover span, span{
+
+  input[type="checkbox"]:checked ~ #overlay-button {
+    &:hover span,
+    span {
       background: transparent;
     }
     span {
@@ -71,7 +89,7 @@ header {
       }
     }
   }
-  
+
   #overlay {
     height: 100%;
     z-index: 2;
@@ -101,12 +119,9 @@ header {
           &:hover {
             background-color: gray;
             color: white;
-          }        
+          }
         }
       }
-           
     }
   }
-  
-
 }
