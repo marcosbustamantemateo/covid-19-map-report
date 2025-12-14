@@ -60,6 +60,7 @@
     "build": "gatsby build",
     "clean": "gatsby clean",
     "test": "jest --config ./config/jest.config.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/colbyfayock/gatsby-starter-leaflet"
