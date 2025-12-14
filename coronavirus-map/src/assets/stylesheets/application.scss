@@ -93,6 +93,14 @@ select:focus {
   font-size: 0.9em;
 }
 
+.country-card {
+  margin-bottom: 80px;
+}
+
+.country-card:last-child {
+  margin-bottom: 120px;
+}
+
 .img-flag-card {
   display: inline-block;
   width: 200px;
@@ -170,4 +178,313 @@ select:focus {
 .stat-tests {
   color: #2196f3 !important;
   font-weight: 600;
+}
+
+/* Comparison functionality styles */
+.country-card.selected {
+  border: 3px solid #667eea;
+  background: linear-gradient(145deg, #f0f4ff 0%, #e8ecff 100%);
+  transform: scale(1.02);
+  box-shadow: 0 6px 25px rgba(102, 126, 234, 0.3);
+}
+
+.selection-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  animation: badge-appear 0.3s ease;
+}
+
+@keyframes badge-appear {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.comparison-controls {
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto 30px;
+  padding: 20px;
+  background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.15);
+  border-top: 4px solid #667eea;
+}
+
+.selection-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.selection-count {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #667eea;
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: "📊";
+    margin-right: 8px;
+    font-size: 1.3em;
+  }
+}
+
+.comparison-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.comparison-buttons .btn-compare,
+.comparison-buttons .btn-clear {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  flex: 1;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .selection-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .comparison-buttons {
+    width: 100%;
+
+    button {
+      flex: 1;
+    }
+  }
+}
+
+// Floating comparison panel on map
+.floating-comparison-panel {
+  position: fixed;
+  bottom: 70px;
+  left: 30px;
+  z-index: 1000;
+  animation: slideInUp 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.panel-content {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
+  min-width: 200px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.selection-count {
+  color: white;
+  font-weight: 600;
+  font-size: 0.95em;
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: "✓";
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    font-size: 0.85em;
+  }
+}
+
+.panel-header .btn-clear {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+  padding: 0;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+  }
+}
+
+.btn-compare {
+  width: 100%;
+  background: white;
+  color: #667eea;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95em;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  &:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.btn-confirm {
+  width: 100%;
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  margin-bottom: 8px;
+
+  &:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.btn-cancel {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
+}
+
+.btn-clear-small {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// Selected marker style
+.icon-marker.selected-marker {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: white !important;
+  box-shadow: 0 0 30px rgba(102, 126, 234, 0.8), 0 0 0 4px white !important;
+  border: 3px solid white !important;
+  transform: scale(1.3) !important;
+  z-index: 1000 !important;
+  font-weight: 700 !important;
+  animation: pulseMarker 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseMarker {
+  0%,
+  100% {
+    box-shadow: 0 0 30px rgba(102, 126, 234, 0.8), 0 0 0 4px white;
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(102, 126, 234, 1), 0 0 0 6px white;
+  }
+}
+
+@media (max-width: 768px) {
+  .floating-comparison-panel {
+    bottom: 80px;
+    left: 20px;
+    right: auto;
+  }
+
+  .panel-content {
+    padding: 16px;
+  }
 }

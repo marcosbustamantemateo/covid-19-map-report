@@ -15,11 +15,59 @@ class Details extends Component {
       typeOrder: "DESC",
       order: "cases",
       textSearch: "",
+      selectedCountries: [],
+      compareMode: false,
     };
   }
 
+  componentDidMount() {
+    this.fetchCountries();
+    // Check if there are country params from map navigation
+    if (typeof window !== "undefined") {
+      const urlParams = new URLSearchParams(window.location.search);
+      const countryParams = urlParams.getAll("country");
+      console.log("URL search params:", window.location.search);
+      console.log("Country params found:", countryParams);
+      if (countryParams.length > 0) {
+        console.log(
+          "Setting compareMode to true with countries:",
+          countryParams
+        );
+        this.setState({ selectedCountries: countryParams, compareMode: true });
+      }
+    }
+  }
+
+  toggleCountrySelection = (countryName) => {
+    this.setState((prevState) => {
+      const isSelected = prevState.selectedCountries.includes(countryName);
+      return {
+        selectedCountries: isSelected
+          ? prevState.selectedCountries.filter((c) => c !== countryName)
+          : [...prevState.selectedCountries, countryName],
+      };
+    });
+  };
+
+  applyComparison = () => {
+    if (this.state.selectedCountries.length > 0) {
+      this.setState({
+        compareMode: true,
+      });
+    }
+  };
+
+  clearComparison = () => {
+    this.setState({
+      selectedCountries: [],
+      compareMode: false,
+      datacountriesSearch: this.state.dataCountries,
+      textSearch: "",
+    });
+  };
+
   handleSetDataCountries = (data, order, orderProperty) => {
-    if (data != null) {
+    if (data != null && Array.isArray(data)) {
       if (order === "DESC") {
         this.setState({
           dataCountries:
@@ -55,22 +103,85 @@ class Details extends Component {
   };
 
   renderCardsCountries = (dataCountries) => {
-    return Array.isArray(dataCountries) || dataCountries.length !== 0 ? (
+    // Filter countries when in compare mode
+    console.log("renderCardsCountries - compareMode:", this.state.compareMode);
+    console.log(
+      "renderCardsCountries - selectedCountries:",
+      this.state.selectedCountries
+    );
+    console.log(
+      "renderCardsCountries - total countries:",
+      dataCountries.length
+    );
+
+    const filteredCountries =
+      this.state.compareMode && this.state.selectedCountries.length > 0
+        ? dataCountries.filter((country) =>
+            this.state.selectedCountries.includes(country.country)
+          )
+        : dataCountries;
+
+    console.log(
+      "renderCardsCountries - filtered countries:",
+      filteredCountries.length
+    );
+    if (this.state.compareMode && this.state.selectedCountries.length > 0) {
+      console.log(
+        "Filtered country names:",
+        filteredCountries.map((c) => c.country)
+      );
+    }
+
+    return Array.isArray(filteredCountries) ||
+      filteredCountries.length !== 0 ? (
       <div>
+        {this.state.selectedCountries.length > 0 && (
+          <div className="comparison-controls">
+            <div className="selection-info">
+              <span className="selection-count">
+                {this.state.selectedCountries.length}{" "}
+                {this.state.selectedCountries.length === 1 ? "país" : "países"}{" "}
+                seleccionado
+                {this.state.selectedCountries.length === 1 ? "" : "s"}
+              </span>
+              <div className="comparison-buttons">
+                {!this.state.compareMode && (
+                  <button
+                    className="btn-compare"
+                    onClick={this.applyComparison}
+                  >
+                    Comparar Seleccionados
+                  </button>
+                )}
+                {this.state.compareMode && (
+                  <button className="btn-clear" onClick={this.clearComparison}>
+                    Ver Todos los Países
+                  </button>
+                )}
+                {!this.state.compareMode && (
+                  <button className="btn-clear" onClick={this.clearComparison}>
+                    Limpiar Selección
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
         {this.state.textSearch === null ||
         this.state.textSearch === "" ? null : (
           <h2>
-            {dataCountries.length === 0 ? "No se" : "Se"}{" "}
-            {dataCountries.length === 1 ? "ha" : "han"} encontrado{" "}
-            {dataCountries.length === 1
+            {filteredCountries.length === 0 ? "No se" : "Se"}{" "}
+            {filteredCountries.length === 1 ? "ha" : "han"} encontrado{" "}
+            {filteredCountries.length === 1
               ? "un resultado"
-              : dataCountries.length === 0
+              : filteredCountries.length === 0
               ? " resultados"
-              : dataCountries.length + " resultados"}
+              : filteredCountries.length + " resultados"}
           </h2>
         )}
 
-        {dataCountries.map((country, index) => {
+        {filteredCountries.map((country, index) => {
           const {
             cases,
             casesPerOneMillion,
@@ -138,8 +249,18 @@ class Details extends Component {
             updatedFormatted = new Date(updated).toLocaleString();
           }
 
+          const isSelected = this.state.selectedCountries.includes(
+            country.country
+          );
+
           return (
-            <div key={index} className="country-card">
+            <div
+              key={index}
+              className={`country-card ${isSelected ? "selected" : ""}`}
+              onClick={() => this.toggleCountrySelection(country.country)}
+              style={{ cursor: "pointer" }}
+            >
+              {isSelected && <div className="selection-badge">✓</div>}
               <img
                 src={countryInfo.flag}
                 alt="flag"
@@ -217,10 +338,6 @@ class Details extends Component {
       ),
     });
   };
-
-  componentDidMount() {
-    this.fetchCountries();
-  }
 
   render() {
     const {
