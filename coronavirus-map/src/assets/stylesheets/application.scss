@@ -30,81 +30,125 @@ main {
 
 .filtering {
   margin: auto;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  width: 264px;
-  padding: 12px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  background: white;
-  transition: box-shadow 0.3s ease;
+  border: none;
+  border-radius: 12px;
+  width: 280px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.15);
+  background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+  transition: all 0.3s ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px 12px 0 0;
+  }
 }
 
 .filtering:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 25px rgba(102, 126, 234, 0.25);
+  transform: translateY(-2px);
 }
 
 .filtering * {
-  margin: 8px 5px;
+  margin: 10px 5px;
   text-align: left;
 }
 
 .filtering input,
 select {
-  width: 138px;
-  padding: 6px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  width: 145px;
+  padding: 10px 12px;
+  border: 2px solid #e8eaf6;
+  border-radius: 8px;
   font-family: inherit;
+  font-size: 0.95em;
+  transition: all 0.3s ease;
+  background: white;
+
+  &:hover {
+    border-color: #c5cae9;
+  }
 }
 
 .filtering input:focus,
 select:focus {
   outline: none;
-  border-color: $purple-modified;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: scale(1.02);
 }
 
 .filtering label {
-  width: 68.48px;
+  width: 72px;
   display: inline-block;
-  font-weight: 500;
+  font-weight: 600;
+  color: #5e35b1;
+  font-size: 0.9em;
 }
 
 .img-flag-card {
   display: inline-block;
   width: 200px;
   height: 120px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
   object-fit: cover;
+  transition: all 0.3s ease;
+  border: 3px solid #f0f0f0;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+    border-color: #667eea;
+  }
 }
 
 .country-card {
   display: inline-block;
-  padding: 16px;
-  margin: 10px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  background: white;
-  transition: all 0.3s ease;
+  padding: 20px;
+  margin: 12px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   vertical-align: top;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  }
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-    border-color: $purple-modified;
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.2);
   }
 
   h4 {
-    margin: 12px 0 8px 0;
-    color: #333;
-    font-size: 1.1em;
+    margin: 12px 0 12px 0;
+    color: #2c3e50;
+    font-size: 1.15em;
+    font-weight: 700;
   }
 
   strong {
-    color: #555;
-    font-size: 0.9em;
+    color: #34495e;
+    font-size: 0.85em;
+    font-weight: 600;
   }
 }
 
