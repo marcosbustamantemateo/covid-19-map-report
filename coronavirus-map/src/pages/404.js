@@ -1,14 +1,17 @@
-import React from 'react';
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-import Layout from 'components/Layout';
-import Container from 'components/Container';
+import Layout from "components/Layout";
+import Container from "components/Container";
 
 const NotFoundPage = () => {
+  const { t } = useTranslation();
+
   return (
     <Layout>
       <Container type="content" className="text-center">
-        <h1>Page Not Found</h1>
-        <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
+        <h1>{t("notFound.title")}</h1>
+        <p>{t("notFound.message")}</p>
       </Container>
     </Layout>
   );

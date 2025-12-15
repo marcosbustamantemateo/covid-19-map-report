@@ -1,0 +1,77 @@
+{
+  "header": {
+    "title": "COVID-19 REPORTS",
+    "worldMap": "WORLD MAP",
+    "details": "DETAILS"
+  },
+  "home": {
+    "title": "COVID-19 REPORTS WORLD MAP",
+    "description": "Real time covid-19 reports per countries",
+    "keywords": "coronavirus, covid, covid19, covid-19, reports, countries, cases, deaths",
+    "compareCountries": "🔍 Compare Countries",
+    "selected": "selected",
+    "selectedPlural": "selected",
+    "confirmComparison": "✓ Confirm Comparison",
+    "cancel": "Cancel",
+    "clearSelection": "Clear Selection",
+    "countries": "countries",
+    "country": "country"
+  },
+  "details": {
+    "title": "COVID-19 REPORTS - Details",
+    "heading": "Details",
+    "orderBy": "Order By",
+    "search": "Search",
+    "loading": "Loading...",
+    "compareSelected": "Compare Selected",
+    "viewAllCountries": "View All Countries",
+    "clearSelection": "Clear Selection",
+    "noResults": "No results found",
+    "oneResult": "One result found",
+    "multipleResults": "{{count}} results found",
+    "countries": "countries",
+    "country": "country",
+    "selectedPlural": "selected",
+    "selected": "selected",
+    "stats": {
+      "confirmed": "CONFIRMED",
+      "confirmedPerMillion": "CONFIRMED/MILLION",
+      "deaths": "DEATHS",
+      "deathsPerMillion": "DEATHS/MILLION",
+      "criticals": "CRITICALS",
+      "recovered": "RECOVERED",
+      "tests": "TESTS",
+      "testsPerMillion": "TESTS/MILLION",
+      "lastUpdate": "LAST UPDATE"
+    },
+    "orderOptions": {
+      "cases": "Confirmed",
+      "casesPerOneMillion": "Confirmed/million",
+      "deaths": "Deaths",
+      "deathsPerOneMillion": "Deaths/million",
+      "critical": "Criticals",
+      "recovered": "Recovered",
+      "tests": "Tests",
+      "testsPerOneMillion": "Tests/million"
+    }
+  },
+  "map": {
+    "confirmed": "Confirmed",
+    "deaths": "Deaths",
+    "recovered": "Recovered",
+    "tests": "Tests",
+    "lastUpdate": "Last Update",
+    "flag": "flag"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "message": "You just hit a route that doesn't exist... the sadness."
+  },
+  "footer": {
+    "by": "By"
+  },
+  "language": {
+    "es": "Español",
+    "en": "English"
+  }
+}

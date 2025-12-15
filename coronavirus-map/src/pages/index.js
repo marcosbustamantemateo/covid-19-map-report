@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Helmet from "react-helmet";
 import L from "leaflet";
 import { navigate } from "gatsby";
+import { withTranslation } from "react-i18next";
 
 import Layout from "components/Layout";
 import Map from "components/Map";
@@ -69,6 +70,7 @@ class IndexPage extends Component {
 
   mapEffect = ({ leafletElement: map } = {}) => {
     const updateParentState = this.updateSelectedCountries;
+    const { t } = this.props;
 
     async function setupMap() {
       if (!map) return;
@@ -105,15 +107,8 @@ class IndexPage extends Component {
           let isClicked = false;
           idArray.push(_id);
 
-          const {
-            country,
-            updated,
-            cases,
-            deaths,
-            recovered,
-            tests,
-            flag,
-          } = properties;
+          const { country, updated, cases, deaths, recovered, tests, flag } =
+            properties;
 
           let casesDots = `${cases}`,
             casesString = `${cases}`,
@@ -155,13 +150,25 @@ class IndexPage extends Component {
 
           const cardInformation = `
             <span id="${_id}" class="icon-marker-tooltip close">
-              <img src="${flag}" alt="flag ${country}" style="width:100%;" /><h2>${country}</h2>
+              <img src="${flag}" alt="${t(
+            "map.flag"
+          )} ${country}" style="width:100%;" /><h2>${country}</h2>
               <ul>
-                <li><strong>Confirmed:</strong> <b style="color:orange;">${casesDots}</b></li>
-                <li><strong>Deaths:</strong> <b style="color:red;">${deathsDots}</b></li>
-                <li><strong>Recovered:</strong> <b style="color:lightgreen;">${recoveredDots}</b></li>
-                <li><strong>Tests:</strong> <b style="color:lightblue;">${testsDots}</b></li>
-                <li><strong>Last Update:</strong> ${updatedFormatted}</li>
+                <li><strong>${t(
+                  "map.confirmed"
+                )}:</strong> <b style="color:orange;">${casesDots}</b></li>
+                <li><strong>${t(
+                  "map.deaths"
+                )}:</strong> <b style="color:red;">${deathsDots}</b></li>
+                <li><strong>${t(
+                  "map.recovered"
+                )}:</strong> <b style="color:lightgreen;">${recoveredDots}</b></li>
+                <li><strong>${t(
+                  "map.tests"
+                )}:</strong> <b style="color:lightblue;">${testsDots}</b></li>
+                <li><strong>${t(
+                  "map.lastUpdate"
+                )}:</strong> ${updatedFormatted}</li>
               </ul>
             </span>
         `;
@@ -255,6 +262,7 @@ class IndexPage extends Component {
 
   render() {
     const { selectedCountries } = this.state;
+    const { t } = this.props;
 
     const mapSettings = {
       center: CENTER,
@@ -269,17 +277,16 @@ class IndexPage extends Component {
           meta={[
             {
               name: "description",
-              content: "Real time covid-19 reports per countries",
+              content: t("home.description"),
             },
             {
               name: "keywords",
-              content:
-                "coronavirus, covid, covid19, covid-19, reports, countries, cases, deaths",
+              content: t("home.keywords"),
             },
           ]}
         >
-          <html lang="en" />
-          <title>COVID-19 REPORTS WORLD MAP</title>
+          <html lang={this.props.i18n.language || "es"} />
+          <title>{t("home.title")}</title>
         </Helmet>
         <Map {...mapSettings} />
 
@@ -287,29 +294,29 @@ class IndexPage extends Component {
           <div className="panel-content">
             {!this.state.compareMode ? (
               <button className="btn-compare" onClick={this.toggleCompareMode}>
-                🔍 Comparar Países
+                {t("home.compareCountries")}
               </button>
             ) : (
               <>
                 <div className="panel-header">
                   <span className="selection-count">
-                    {selectedCountries.length} selected
+                    {selectedCountries.length} {t("home.selected")}
                   </span>
                   <button
                     className="btn-clear-small"
                     onClick={this.clearSelection}
-                    title="Clear selection"
+                    title={t("home.clearSelection")}
                   >
                     ✕
                   </button>
                 </div>
                 {selectedCountries.length > 1 && (
                   <button className="btn-confirm" onClick={this.goToComparison}>
-                    ✓ Confirmar Comparación
+                    {t("home.confirmComparison")}
                   </button>
                 )}
                 <button className="btn-cancel" onClick={this.toggleCompareMode}>
-                  Cancelar
+                  {t("home.cancel")}
                 </button>
               </>
             )}
@@ -320,4 +327,4 @@ class IndexPage extends Component {
   }
 }
 
-export default IndexPage;
+export default withTranslation()(IndexPage);

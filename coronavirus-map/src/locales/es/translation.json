@@ -1,0 +1,77 @@
+{
+  "header": {
+    "title": "COVID-19 REPORTES",
+    "worldMap": "MAPA MUNDIAL",
+    "details": "DETALLES"
+  },
+  "home": {
+    "title": "MAPA MUNDIAL DE REPORTES COVID-19",
+    "description": "Información casi en tiempo real sobre coronavirus por países",
+    "keywords": "coronavirus, covid, covid19, covid-19, reportes, países, casos, muertes",
+    "compareCountries": "🔍 Comparar Países",
+    "selected": "seleccionado",
+    "selectedPlural": "seleccionados",
+    "confirmComparison": "✓ Confirmar Comparación",
+    "cancel": "Cancelar",
+    "clearSelection": "Limpiar Selección",
+    "countries": "países",
+    "country": "país"
+  },
+  "details": {
+    "title": "COVID-19 REPORTES - Detalles",
+    "heading": "Detalles",
+    "orderBy": "Ordenar Por",
+    "search": "Buscar",
+    "loading": "Cargando...",
+    "compareSelected": "Comparar Seleccionados",
+    "viewAllCountries": "Ver Todos los Países",
+    "clearSelection": "Limpiar Selección",
+    "noResults": "No se han encontrado resultados",
+    "oneResult": "Se ha encontrado un resultado",
+    "multipleResults": "Se han encontrado {{count}} resultados",
+    "countries": "países",
+    "country": "país",
+    "selectedPlural": "seleccionados",
+    "selected": "seleccionado",
+    "stats": {
+      "confirmed": "CONFIRMADOS",
+      "confirmedPerMillion": "CONFIRMADOS/MILLÓN",
+      "deaths": "MUERTES",
+      "deathsPerMillion": "MUERTES/MILLÓN",
+      "criticals": "CRÍTICOS",
+      "recovered": "RECUPERADOS",
+      "tests": "PRUEBAS",
+      "testsPerMillion": "PRUEBAS/MILLÓN",
+      "lastUpdate": "ÚLTIMA ACTUALIZACIÓN"
+    },
+    "orderOptions": {
+      "cases": "Confirmados",
+      "casesPerOneMillion": "Confirmados/millón",
+      "deaths": "Muertes",
+      "deathsPerOneMillion": "Muertes/millón",
+      "critical": "Críticos",
+      "recovered": "Recuperados",
+      "tests": "Pruebas",
+      "testsPerOneMillion": "Pruebas/millón"
+    }
+  },
+  "map": {
+    "confirmed": "Confirmados",
+    "deaths": "Muertes",
+    "recovered": "Recuperados",
+    "tests": "Pruebas",
+    "lastUpdate": "Última Actualización",
+    "flag": "bandera"
+  },
+  "notFound": {
+    "title": "Página No Encontrada",
+    "message": "Acabas de acceder a una ruta que no existe... qué tristeza."
+  },
+  "footer": {
+    "by": "Por"
+  },
+  "language": {
+    "es": "Español",
+    "en": "English"
+  }
+}

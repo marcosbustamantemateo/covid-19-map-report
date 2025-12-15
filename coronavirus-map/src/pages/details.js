@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Helmet from "react-helmet";
+import { withTranslation } from "react-i18next";
 
 import Layout from "components/Layout";
 
@@ -140,9 +141,12 @@ class Details extends Component {
             <div className="selection-info">
               <span className="selection-count">
                 {this.state.selectedCountries.length}{" "}
-                {this.state.selectedCountries.length === 1 ? "país" : "países"}{" "}
-                seleccionado
-                {this.state.selectedCountries.length === 1 ? "" : "s"}
+                {this.state.selectedCountries.length === 1
+                  ? this.props.t("details.country")
+                  : this.props.t("details.countries")}{" "}
+                {this.state.selectedCountries.length === 1
+                  ? this.props.t("details.selected")
+                  : this.props.t("details.selectedPlural")}
               </span>
               <div className="comparison-buttons">
                 {!this.state.compareMode && (
@@ -150,17 +154,17 @@ class Details extends Component {
                     className="btn-compare"
                     onClick={this.applyComparison}
                   >
-                    Comparar Seleccionados
+                    {this.props.t("details.compareSelected")}
                   </button>
                 )}
                 {this.state.compareMode && (
                   <button className="btn-clear" onClick={this.clearComparison}>
-                    Ver Todos los Países
+                    {this.props.t("details.viewAllCountries")}
                   </button>
                 )}
                 {!this.state.compareMode && (
                   <button className="btn-clear" onClick={this.clearComparison}>
-                    Limpiar Selección
+                    {this.props.t("details.clearSelection")}
                   </button>
                 )}
               </div>
@@ -171,13 +175,13 @@ class Details extends Component {
         {this.state.textSearch === null ||
         this.state.textSearch === "" ? null : (
           <h2>
-            {filteredCountries.length === 0 ? "No se" : "Se"}{" "}
-            {filteredCountries.length === 1 ? "ha" : "han"} encontrado{" "}
-            {filteredCountries.length === 1
-              ? "un resultado"
-              : filteredCountries.length === 0
-              ? " resultados"
-              : filteredCountries.length + " resultados"}
+            {filteredCountries.length === 0
+              ? this.props.t("details.noResults")
+              : filteredCountries.length === 1
+              ? this.props.t("details.oneResult")
+              : this.props.t("details.multipleResults", {
+                  count: filteredCountries.length,
+                })}
           </h2>
         )}
 
@@ -268,34 +272,42 @@ class Details extends Component {
               />
               <h4>{index + 1 + ". " + country.country.toUpperCase()}</h4>
               <div className="country-info">
-                <strong>CONFIRMED:</strong>{" "}
+                <strong>{this.props.t("details.stats.confirmed")}:</strong>{" "}
                 <b className="stat-confirmed">{casesDots}</b> <br></br>
-                <strong>CONFIRMED/MILLION:</strong>{" "}
+                <strong>
+                  {this.props.t("details.stats.confirmedPerMillion")}:
+                </strong>{" "}
                 <b className="stat-confirmed">{casesPerOneMillionDots}</b>{" "}
                 <br></br>
-                <strong>DEATHS: </strong>{" "}
+                <strong>{this.props.t("details.stats.deaths")}: </strong>{" "}
                 <b className="stat-deaths">{deathsDots}</b> <br></br>
-                <strong>DEATHS/MILLION:</strong>{" "}
+                <strong>
+                  {this.props.t("details.stats.deathsPerMillion")}:
+                </strong>{" "}
                 <b className="stat-deaths"> {deathsPerOneMillionDots}</b>{" "}
                 <br></br>
-                <strong>CRITICALS:</strong>{" "}
+                <strong>{this.props.t("details.stats.criticals")}:</strong>{" "}
                 <b className="stat-deaths"> {criticalDots}</b> <br></br>
-                <strong>RECOVERED:</strong>{" "}
+                <strong>{this.props.t("details.stats.recovered")}:</strong>{" "}
                 <b className="stat-recovered"> {recoveredDots}</b> <br></br>
-                <strong>TESTS:</strong>{" "}
+                <strong>{this.props.t("details.stats.tests")}:</strong>{" "}
                 <b className="stat-tests"> {testsDots}</b> <br></br>
-                <strong>TESTS/MILLION:</strong>{" "}
+                <strong>
+                  {this.props.t("details.stats.testsPerMillion")}:
+                </strong>{" "}
                 <b className="stat-tests"> {testsPerOneMillionDots}</b>{" "}
                 <br></br>
-                <strong>LAST UPDATE:</strong> <b> {updatedFormatted}</b>{" "}
-                <br></br>
+                <strong>
+                  {this.props.t("details.stats.lastUpdate")}:
+                </strong>{" "}
+                <b> {updatedFormatted}</b> <br></br>
               </div>
             </div>
           );
         })}
       </div>
     ) : (
-      <p>Loading...</p>
+      <p>{this.props.t("details.loading")}</p>
     );
   };
 
@@ -340,38 +352,45 @@ class Details extends Component {
   };
 
   render() {
-    const {
-      dataCountries,
-      datacountriesSearch,
-      typeOrder,
-      textSearch,
-    } = this.state;
+    const { dataCountries, datacountriesSearch, typeOrder, textSearch } =
+      this.state;
+    const { t } = this.props;
 
     return (
       <Layout pageName="statistics">
         <Helmet>
-          <title>COVID-19 REPORTS - Details</title>
+          <title>{t("details.title")}</title>
         </Helmet>
         <div className="text-center">
-          <h1>Details</h1>
+          <h1>{t("details.heading")}</h1>
           <div className="filtering">
-            <label htmlFor="order">Order By</label>
+            <label htmlFor="order">{t("details.orderBy")}</label>
             <select
               id="order"
               onChange={(event) => this.handleOrderBy(event, typeOrder)}
             >
-              <option value="cases">Confirmed</option>
-              <option value="casesPerOneMillion">Confirmed/million</option>
-              <option value="deaths">Deaths</option>
-              <option value="deathsPerOneMillion">Deaths/million</option>
-              <option value="critical">Criticals</option>
-              <option value="recovered">Recovered</option>
-              <option value="tests">Tests</option>
-              <option value="testsPerOneMillion">Tests/million</option>
+              <option value="cases">{t("details.orderOptions.cases")}</option>
+              <option value="casesPerOneMillion">
+                {t("details.orderOptions.casesPerOneMillion")}
+              </option>
+              <option value="deaths">{t("details.orderOptions.deaths")}</option>
+              <option value="deathsPerOneMillion">
+                {t("details.orderOptions.deathsPerOneMillion")}
+              </option>
+              <option value="critical">
+                {t("details.orderOptions.critical")}
+              </option>
+              <option value="recovered">
+                {t("details.orderOptions.recovered")}
+              </option>
+              <option value="tests">{t("details.orderOptions.tests")}</option>
+              <option value="testsPerOneMillion">
+                {t("details.orderOptions.testsPerMillion")}
+              </option>
             </select>
             <button onClick={this.handleTypeOrder}>{typeOrder}</button>
             <br></br>
-            <label htmlFor="search">Search</label>
+            <label htmlFor="search">{t("details.search")}</label>
             <input type="text" id="search" onChange={this.handleTextSearch} />
           </div>
           {textSearch === null || textSearch === ""
@@ -383,4 +402,4 @@ class Details extends Component {
   }
 }
 
-export default Details;
+export default withTranslation()(Details);
