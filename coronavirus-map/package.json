@@ -59,7 +59,9 @@
     "start": "node start.js",
     "build": "gatsby build",
     "clean": "gatsby clean",
-    "test": "jest --config ./config/jest.config.js"
+    "test": "jest --config ./config/jest.config.js",
+    "deploy": "gatsby build && npx firebase deploy",
+    "deploy:hosting": "npx firebase deploy --only hosting"
   },
   "repository": {
     "type": "git",
