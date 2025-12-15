@@ -303,6 +303,15 @@ select:focus {
   left: 30px;
   z-index: 1000;
   animation: slideInUp 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+// Ocultar cuando el menú overlay está abierto
+#overlay-input:checked ~ .wrapper .floating-comparison-panel,
+body:has(#overlay-input:checked) .floating-comparison-panel {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 .panel-content {
